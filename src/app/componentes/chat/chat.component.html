@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="message">
+      <div *ngFor="let msg of messages">
+        <div class="messageText">
+            <p>{{ msg.message }}</p>
+        </div>
+        
+      </div>
+    </div>
+    <div class="end">
+      <form [formGroup]="form" (ngSubmit)="sendMessage()">
+        <mat-form-field class="input-full-width">
+          <mat-label>Mensaje</mat-label>
+          <input type="text" matInput placeholder="Ingrese los mensajes" formControlName="message">
+          <button mat-icon-button matSuffix type="submit" matTooltip="Enviar mensaje">
+            <mat-icon>send</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
