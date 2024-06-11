@@ -13,10 +13,11 @@ export class ChatComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   public messages: any[] = [];
   public message: string = "";
-
+  id_user:number = 1;
   constructor(private socketService: SocketService, private _formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
+    this.getPreviousMessage()
     this.formMessage();
     this.getMessage()
 
@@ -34,10 +35,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   getMessage(): void {
-    this.messages=[]
     this.subscription.add(
       this.socketService.onMessage().subscribe((message: any) => {
-
         this.messages.push(message);
       })
     );
@@ -45,8 +44,15 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   sendMessage(): void {
     if(this.form.valid){
-      this.socketService.sendMessage({user:"Julio", message:this.form.value.message});
+      this.socketService.sendMessage({id_user:this.id_user, mensaje:this.form.value.message});
       this.form.reset();
     }
+  }
+  getPreviousMessage(): void {
+    this.subscription.add(
+      this.socketService.onPreviousMessages().subscribe((data:any) => {
+        this.messages = data;
+      })
+    )
   }
 }

@@ -9,7 +9,11 @@ export class SocketService {
   private socket: Socket;
 
   constructor() {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('http://localhost:3000',{
+      query:{
+        idChat:1
+      }
+    });
   }
 
   sendMessage(message: any) {
@@ -21,6 +25,13 @@ export class SocketService {
     return new Observable<string>((observer) => {
       this.socket.on('chat', (msg: string) => {
         observer.next(msg);
+      });
+    });
+  }
+  onPreviousMessages(): Observable<any> {
+    return new Observable(observer => {
+      this.socket.on('previous messages', (messages) => {
+        observer.next(messages);
       });
     });
   }

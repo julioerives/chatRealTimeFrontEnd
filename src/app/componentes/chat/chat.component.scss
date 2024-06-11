@@ -25,16 +25,38 @@
 .input-full-width{
     width: 100%;
 }
-.messageText{
+.messageTextFriend{
     width: 200px;
     background-color: rgb(0, 0, 176);
     color: white;
     padding: 8px 2px;
     border-radius: 5px;
 }
-.messageText p{
-    font-size: 20px;
-    padding: 5px;
+.messageTextMe{
+    width: 200px;
+    background-color: rgb(0, 202, 54);
+    color: white;
+    padding: 8px 2px;
+    border-radius: 5px;
+}
+.containerMessagesMe, .containerMessagesFriend {
+    width: 100%;
+    display: flex;
+  }
+  
+.containerMessagesMe {
+    justify-content: flex-end;
+}
+  
+.containerMessagesFriend {
+    justify-content: flex-start; 
+}
+p{
+    font-size: 17px;
+    padding: 5px 2px ;
+}
+i{
+    font-size: 10px;
 }
 @media(max-width:500px){
     .message{

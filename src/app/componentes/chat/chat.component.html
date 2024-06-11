@@ -1,10 +1,19 @@
 <div class="container">
     <div class="message">
       <div *ngFor="let msg of messages">
-        <div class="messageText">
-            <p>{{ msg.message }}</p>
+        <div [ngClass]="msg.id_usuario == id_user?'containerMessagesMe':'containerMessagesFriend'">
+          <div class="messageTextFriend" *ngIf="msg.id_usuario != id_user">
+            <p>{{ msg.mensaje }}</p>
+            <i class="dateComment">{{msg.fecha_creacion}}</i>
+           
         </div>
-        
+        <div *ngIf="msg.id_usuario == id_user" class="messageTextMe">
+          <p>{{ msg.mensaje }}
+          </p>
+          <i class="dateComment">{{msg.fecha_creacion}}</i>
+      </div>
+        </div>
+      
       </div>
     </div>
     <div class="end">
