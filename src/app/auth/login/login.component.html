@@ -1,0 +1,18 @@
+<div class="container">
+    <form class="form" (ngSubmit)="enviar()" [formGroup]="form">
+        <p class="title">Login </p>
+       <div class="containerForm">
+        <!-- <p class="message">Inicia sesion para chatear con tus amigos </p> -->
+       <div class="inpContainer">
+        <input type="email" name="nombre" placeholder="Ingrese su nombre de usuario" formControlName="correo">
+       </div>
+       <div class="inpContainer">
+        <input type="password"  placeholder="Ingrese su contraseña" formControlName="contraseña">
+       </div>
+      
+        <button class="btn" type="submit">Submit</button>
+        
+       </div>
+       <p class="signin">Already have an acount ? <a href="#">Signin</a> </p>
+    </form>
+</div>

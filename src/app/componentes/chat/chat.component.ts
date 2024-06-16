@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,Inject } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { SocketService } from 'src/app/services/socket.service';
+import { SocketService } from 'src/app/services/socket/socket.service';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-
+import { AuthServiceService } from 'src/app/auth/authService/auth-service.service';
+import { AfterViewInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -10,22 +12,35 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 })
 export class ChatComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
+  @ViewChild('message') contenido!: ElementRef;
   private subscription: Subscription = new Subscription();
   public messages: any[] = [];
   public message: string = "";
   id_user:number = 1;
-  constructor(private socketService: SocketService, private _formBuilder: FormBuilder) {}
+   
+    constructor( @Inject(MAT_DIALOG_DATA) public data: any,private socketService: SocketService, private _formBuilder: FormBuilder,private authService:AuthServiceService,private cdr: ChangeDetectorRef,) {}
 
   ngOnInit(): void {
-    this.getPreviousMessage()
-    this.formMessage();
-    this.getMessage()
+    console.log(this.authService.getChatId());
+    this.socketService.initializeSocket();
 
+    this.getPreviousMessage();
+    this.formMessage();
+    this.getMessage();
+    this.changeID();
+  }
+  ngAfterViewChecked() {
+    this.cdr.detectChanges();
+    this.scrollToBottom();
   }
 
   ngOnDestroy(): void {
-    
     this.subscription.unsubscribe();
+    this.socketService.disconnect();
+  }
+
+  changeID() {
+    this.id_user = this.authService.getId();
   }
 
   formMessage(): void {
@@ -43,16 +58,31 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   sendMessage(): void {
-    if(this.form.valid){
-      this.socketService.sendMessage({id_user:this.id_user, mensaje:this.form.value.message});
+    if (this.form.valid) {
+      this.socketService.sendMessage({ id_user: this.id_user, mensaje: this.form.value.message });
       this.form.reset();
     }
   }
+
   getPreviousMessage(): void {
     this.subscription.add(
-      this.socketService.onPreviousMessages().subscribe((data:any) => {
+      this.socketService.onPreviousMessages().subscribe((data: any) => {
         this.messages = data;
       })
-    )
+    );
   }
+
+  scrollToBottom(): void {
+    try {
+      const contenido = this.contenido.nativeElement;
+      contenido.scrollTop = contenido.scrollHeight;
+    } catch (err) {
+      console.error('Error scrolling to bottom:', err);
+    }
+  }
+
+  cerrarModal() {
+    this.authService.removeChatId();
+  }
+
 }

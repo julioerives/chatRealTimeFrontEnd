@@ -1,22 +1,25 @@
 .container{
     width: 100%;
-    height: 101vh;
+    height: 88vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: rgb(215, 215, 215);
+    padding: 70px 0 0 0;
 }
 .message{
-    width:45%;
-    height: 90%;
+    width:calc(100% - 30px);
+    height: 100%;
     display: flex;
     flex-direction: column;
     gap: 5px;
     background-color: rgb(232, 232, 232);
     padding: 10px;
     margin-left: 10px;
+    // transition: all .2s ease;
     overflow: auto;
+    overflow-y: scroll;
 }
 .end{
     width: 100%;
@@ -25,25 +28,26 @@
 .input-full-width{
     width: 100%;
 }
-.messageTextFriend{
-    width: 200px;
-    background-color: rgb(0, 0, 176);
-    color: white;
+.messageTextFriend,.messageTextMe{
+    min-width: 220px;
+    max-width: 260px;
+    background-color: rgb(188, 188, 188);
+    color: black;
     padding: 8px 2px;
     border-radius: 5px;
+    box-shadow: 0 0 1px rgb(182, 182, 182);
 }
 .messageTextMe{
-    width: 200px;
-    background-color: rgb(0, 202, 54);
-    color: white;
-    padding: 8px 2px;
-    border-radius: 5px;
+    background-color: rgb(143, 242, 169);
 }
 .containerMessagesMe, .containerMessagesFriend {
     width: 100%;
     display: flex;
   }
-  
+  .messageContainer{
+    display: flex;
+    flex-direction: column;
+  }
 .containerMessagesMe {
     justify-content: flex-end;
 }
@@ -52,11 +56,27 @@
     justify-content: flex-start; 
 }
 p{
-    font-size: 17px;
-    padding: 5px 2px ;
+    font-size: 13px;
+    padding: 0 5px;
+    overflow: visible; /* Permite que el contenido se expanda fuera del contenedor si es necesario */
+    word-wrap: break-word; /* Permite que las palabras largas se ajusten */
+    white-space: normal;
+}
+.nameUser{
+    font-size: 10px;
+    padding: 0;
+}
+// .btn-close{
+//     position: absolute;
+//     bottom: 0;
+//     right: 0;
+// }
+.header{
+    justify-content: space-between;
 }
 i{
-    font-size: 10px;
+    font-size: 9px;
+    text-align: end;
 }
 @media(max-width:500px){
     .message{
