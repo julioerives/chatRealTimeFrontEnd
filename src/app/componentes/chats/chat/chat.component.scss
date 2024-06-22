@@ -38,7 +38,7 @@
     box-shadow: 0 0 1px rgb(182, 182, 182);
 }
 .messageTextMe{
-    background-color: rgb(143, 242, 169);
+    background-color: rgb(143, 209, 242);
 }
 .containerMessagesMe, .containerMessagesFriend {
     width: 100%;
@@ -78,8 +78,31 @@ i{
     font-size: 9px;
     text-align: end;
 }
-@media(max-width:500px){
-    .message{
+.itemCargando{
+    font-size: 18px;
+
+}
+.itemCargando::before {
+    content: "cargando.";
+    animation: cargandoAnimacion 6s infinite;
+}
+
+@media (max-width: 500px) {
+    .container {
         width: 100%;
+    }
+}
+@keyframes cargandoAnimacion {
+    0%{
+        content: "Cargando.";
+    }
+    30%{
+        content: "Cargando..";
+    }
+    60%{
+        content: "Cargando...";
+    }
+    90%{
+        content: "Favor de esperar";
     }
 }

@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { configChats,configNewChat } from 'src/app/shared/modalsConfig/chatConfig';
 import { Router } from '@angular/router';
 import { NewChatComponent } from '../chats/new-chat/new-chat.component';
+import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -20,7 +21,8 @@ export class DashboardComponent implements OnInit,OnDestroy {
   constructor(private services:Contexto,
     private authService:AuthServiceService,
     private modal:MatDialog,
-    private router:Router
+    private router:Router,
+    private spinner:SpinnerService
   ){}
   private subscription = new Subscription
   
@@ -35,6 +37,7 @@ export class DashboardComponent implements OnInit,OnDestroy {
     this.id=this.authService.getId()
   }
   getChats(){
+    this.spinner.showSpinner()
     this.subscription.add(
       this.services.chatsUser().getChats(this.id).subscribe({
         next:(e)=>{
@@ -43,6 +46,7 @@ export class DashboardComponent implements OnInit,OnDestroy {
             return
           }
           this.data = e.data;
+          this.spinner.noShowSpinner();
         },
         error:(e)=>{
           alert(e.message);

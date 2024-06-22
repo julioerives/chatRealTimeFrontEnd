@@ -6,39 +6,44 @@
     <h1>{{data.nombre}}</h1>
     <button class="btn-close" [mat-dialog-close]="cerrarModal()"> <mat-icon>close</mat-icon> </button>
   </div>
-    <div class="message" id="message" #message>
-      <div *ngFor="let msg of messages">
-        <div [ngClass]="msg.id_usuario == id_user?'containerMessagesMe':'containerMessagesFriend'">
-          <div class="messageTextFriend" *ngIf="msg.id_usuario != id_user">
-            <p class="nameUser"> {{msg.nombre_usuario}}</p>
-            <div class="messageContainer">
-              <p>{{ msg.mensaje }}</p>
-            <i class="dateComment">{{msg.hora_creacion}}</i>
-            </div>
-           
-        </div>
-        <div *ngIf="msg.id_usuario == id_user" class="messageTextMe">
+  <div class="message" id="message" *ngIf="messages.length >0" #message>
+    <div *ngFor="let msg of messages" >
+      <div [ngClass]="msg.id_usuario == id_user?'containerMessagesMe':'containerMessagesFriend'">
+        <div class="messageTextFriend" *ngIf="msg.id_usuario != id_user">
           <p class="nameUser"> {{msg.nombre_usuario}}</p>
           <div class="messageContainer">
-            <p>{{ msg.mensaje }}
-            </p>
-            <i class="dateComment">{{msg.hora_creacion}}</i>
+            <p>{{ msg.mensaje }}</p>
+          <i class="dateComment">{{msg.hora_creacion}}</i>
           </div>
+         
       </div>
+      <div *ngIf="msg.id_usuario == id_user" class="messageTextMe">
+        <p class="nameUser"> {{msg.nombre_usuario}}</p>
+        <div class="messageContainer">
+          <p>{{ msg.mensaje }}
+          </p>
+          <i class="dateComment">{{msg.hora_creacion}}</i>
         </div>
-      
-      </div>
-      <div class="end">
-        <form [formGroup]="form" (ngSubmit)="sendMessage()">
-          <mat-form-field class="input-full-width">
-            <mat-label>Mensaje</mat-label>
-            <input type="text" matInput placeholder="Ingrese los mensajes" formControlName="message">
-            <button mat-icon-button matSuffix type="submit" matTooltip="Enviar mensaje">
-              <mat-icon>send</mat-icon>
-            </button>
-          </mat-form-field>
-        </form>
-      </div>
     </div>
+      </div>
     
+    </div>
+    <div class="end">
+      <form [formGroup]="form" (ngSubmit)="sendMessage()">
+        <mat-form-field class="input-full-width">
+          <mat-label>Mensaje</mat-label>
+          <input type="text" matInput placeholder="Ingrese los mensajes" formControlName="message">
+          <button mat-icon-button matSuffix type="submit" matTooltip="Enviar mensaje">
+            <mat-icon>send</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+    <div class="cargando" *ngIf="messages.length <1">
+      <div class="itemCargando">
+        
+      </div>
+
+    </div>
   </div>

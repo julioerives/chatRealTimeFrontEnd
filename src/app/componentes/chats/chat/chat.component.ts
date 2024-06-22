@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { AuthServiceService } from 'src/app/auth/authService/auth-service.service';
 import { AfterViewInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -15,13 +16,13 @@ export class ChatComponent implements OnInit, OnDestroy {
   @ViewChild('message') contenido!: ElementRef;
   private subscription: Subscription = new Subscription();
   public messages: any[] = [];
+  public bandera: boolean = false;
   public message: string = "";
   id_user:number = 1;
    
-    constructor( @Inject(MAT_DIALOG_DATA) public data: any,private socketService: SocketService, private _formBuilder: FormBuilder,private authService:AuthServiceService,private cdr: ChangeDetectorRef,) {}
+    constructor( @Inject(MAT_DIALOG_DATA) public data: any,private socketService: SocketService, private _formBuilder: FormBuilder,private authService:AuthServiceService,private cdr: ChangeDetectorRef,private spinner:SpinnerService) {}
 
   ngOnInit(): void {
-    console.log(this.authService.getChatId());
     this.socketService.initializeSocket();
 
     this.getPreviousMessage();
