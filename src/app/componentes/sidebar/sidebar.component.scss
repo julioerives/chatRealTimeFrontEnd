@@ -1,0 +1,68 @@
+.example-container{
+    height: 100%;
+    position: absolute;
+    width: 100%;
+
+}
+.example-sidenav{
+    width: 280px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.listRoutes{
+    display: flex;
+    flex-direction: column;
+    height:60% ;
+}
+.list{
+    height: 60%;
+}
+.closeSidenav{
+    height: 10%;
+    border-bottom: solid .5px rgb(194, 194, 194,.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: var(--blue);
+    background-color: var(--blue);
+    color: white;
+
+}
+.closeSidenav h1{
+    font-size: 20px;
+    
+}
+.closeSidenav p{
+    text-align: right;
+}
+.router{
+    width: 100%;
+    height: 100%;
+}
+.routeRedirect,.logout{
+    height: 60px;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    color: var(--blue);
+    transition: all .2s;
+    justify-content: space-between;
+    border-bottom: solid .5px rgb(194, 194, 194,.5) ;
+    
+}
+.routeRedirect:hover{
+    background-color: rgb(128, 128, 128,0.4);
+}
+.logout:hover{
+    background-color: var(--blue);
+    color: white;
+    
+}

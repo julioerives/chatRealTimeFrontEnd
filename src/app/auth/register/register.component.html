@@ -4,15 +4,19 @@
        <div class="containerForm">
         <!-- <p class="message">Inicia sesion para chatear con tus amigos </p> -->
        <div class="inpContainer">
-        <input type="email" name="nombre" placeholder="Ingrese su nombre de usuario" formControlName="correo">
+        <input type="email" name="nombre" placeholder="Ingrese su correo" formControlName="correo">
+       </div>
+       <div class="inpContainer">
+        <input type="text"  placeholder="Ingrese su nombre de usuario" formControlName="nombreUsuario">
        </div>
        <div class="inpContainer">
         <input type="password"  placeholder="Ingrese su contraseña" formControlName="contraseña">
        </div>
+       
       
         <button class="btn" type="submit">Submit</button>
         
        </div>
-       <p class="signin">No tienes cuenta? <a routerLink="/register"> Ve aqui</a> </p>
+       <p class="signin">Ya tengo cuenta? <a href="#">Ve aqui</a> </p>
     </form>
 </div>

@@ -4,10 +4,11 @@ import { AuthServiceService } from 'src/app/auth/authService/auth-service.servic
 import { Chats } from 'src/app/models/chats/chats.model';
 import { ChatsService } from 'src/app/services/chats/chats.service';
 import { Contexto } from 'src/app/services/contexto';
-import { ChatComponent } from '../chat/chat.component';
+import { ChatComponent } from '../chats/chat/chat.component';
 import { MatDialog } from '@angular/material/dialog';
-import { configChats } from 'src/app/shared/modalsConfig/chatConfig';
+import { configChats,configNewChat } from 'src/app/shared/modalsConfig/chatConfig';
 import { Router } from '@angular/router';
+import { NewChatComponent } from '../chats/new-chat/new-chat.component';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -37,15 +38,14 @@ export class DashboardComponent implements OnInit,OnDestroy {
     this.subscription.add(
       this.services.chatsUser().getChats(this.id).subscribe({
         next:(e)=>{
-          console.log("Hola")
           if(e.error){
-            console.log(e)
+            alert(e.message);
             return
           }
           this.data = e.data;
         },
         error:(e)=>{
-          console.log(e)
+          alert(e.message);
         }
       })
     )
@@ -57,9 +57,10 @@ export class DashboardComponent implements OnInit,OnDestroy {
       ...configChats
     })
   }
-  cerrarSesion(){
-    this.authService.removeCredencial();
-    this.authService.removeChatId();
-    this.router.navigate(['login'])
+  openNewChat(){
+    const dialog = this.modal.open(NewChatComponent,{
+      ...configNewChat
+    })
   }
+ 
 }

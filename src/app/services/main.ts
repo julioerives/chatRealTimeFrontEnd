@@ -11,4 +11,7 @@ export class Main{
     getById(id:number|string):Observable<Response>{
         return this._http.get<Response>(this.url+"/"+id)
     }
+    insert(data:any):Observable<Response>{
+        return this._http.post<Response>(this.url+"/register",data)
+    }
 }

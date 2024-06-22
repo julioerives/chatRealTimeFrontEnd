@@ -8,13 +8,11 @@ export class AuthServiceService {
   private chat:string = "chat"
   constructor() { }
   setCredencial(credencial:any) {
-    console.log(credencial);
     console.log(JSON.stringify(credencial))
     localStorage.setItem(this.credencial, JSON.stringify(credencial));
   }
   getCredencial():any {
     const credencial = localStorage.getItem(this.credencial);
-    console.log(credencial);
     if(credencial){
       return JSON.parse(credencial)
     }

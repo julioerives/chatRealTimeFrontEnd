@@ -5,3 +5,8 @@ export const configChats={
   height: '97.78vh',
   panelClass: 'modalAngular',
 }
+export const configNewChat={
+  disableClose: false,
+  height: '55vh',
+  panelClass: 'modalAngular',
+}

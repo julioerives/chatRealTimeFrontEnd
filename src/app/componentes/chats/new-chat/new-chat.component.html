@@ -1,0 +1,37 @@
+<div class="containerNewChat">
+    <div class="header">
+        <h1>Nuevo chat</h1>
+    </div>
+    <form class="form" [formGroup]="form">
+      <div>
+        <mat-form-field appearance="outline" class="inputFormField" floatLabel="always" >
+            <mat-label class="mat-label"  >Nombre</mat-label>
+            <input matInput placeholder="Ingrese el nombre" formControlName="nombre">
+        </mat-form-field>
+    </div>
+    <mat-form-field  appearance="outline"  class="inputFormField" floatLabel="always" >
+      <mat-label class="mat-label">Descripcion</mat-label>
+      <textarea matInput placeholder="Ingrese la descripcion" formControlName="descripcion"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Amigos</mat-label>
+      <mat-select formControlName="friends" multiple>
+        <mat-select-trigger>
+          {{getValueFriends()[0]?.nombre_usuario || ''}}
+          
+            <span *ngIf="(getValueFriends()?.length || 0) > 1" class="example-additional-selection">
+              (+{{(getValueFriends()?.length || 0) - 1}} {{getValueFriends().value?.length === 2 ? 'otro' : 'otros'}})
+            </span>
+          
+        </mat-select-trigger>
+       
+      <mat-option *ngFor="let element of userFriends" [value]="element">{{element.nombre_usuario}}</mat-option>
+  
+      </mat-select>
+    </mat-form-field>
+    <div class="buttons">
+      <button (click)="cancelar()" class="btn close">Cancelar</button>
+      <button class="btn" (click)="submit()">Agregar</button>
+    </div>
+      </form>
+</div>

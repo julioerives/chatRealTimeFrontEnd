@@ -15,4 +15,7 @@ export class ChatsService extends Main {
     console.log(idUser)
     return this.cliente.get<Response>(this.url+"/chatsUser/"+idUser)
   }
+  insertChat(data:any):Observable<Response>{
+    return this.cliente.post<Response>(this.url+"/chatsUser",data)
+  }
 }
