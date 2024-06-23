@@ -19,6 +19,8 @@ import { NewChatComponent } from './componentes/chats/new-chat/new-chat.componen
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { ModalAlertConfirmComponent } from './shared/modalsAlert/modal-alert-confirm/modal-alert-confirm.component';
+import { ModalAlertComponent } from './shared/modalsAlert/modal-alert/modal-alert.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,9 @@ import { MatSelectModule } from '@angular/material/select';
     SidebarComponent,
     FriendsComponent,
     RegisterComponent,
-    NewChatComponent
+    NewChatComponent,
+    ModalAlertConfirmComponent,
+    ModalAlertComponent,
   ],
   imports: [
     BrowserModule,

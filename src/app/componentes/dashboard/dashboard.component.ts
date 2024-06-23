@@ -10,6 +10,9 @@ import { configChats,configNewChat } from 'src/app/shared/modalsConfig/chatConfi
 import { Router } from '@angular/router';
 import { NewChatComponent } from '../chats/new-chat/new-chat.component';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
+import { ModalAlertComponent } from 'src/app/shared/modalsAlert/modal-alert/modal-alert.component';
+import { configAlert } from 'src/app/shared/modalsConfig/alertConfig';
+import { ErrorShowService } from 'src/app/shared/errorsMethods/error-show.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -22,7 +25,8 @@ export class DashboardComponent implements OnInit,OnDestroy {
     private authService:AuthServiceService,
     private modal:MatDialog,
     private router:Router,
-    private spinner:SpinnerService
+    private spinner:SpinnerService,
+    private errorService:ErrorShowService
   ){}
   private subscription = new Subscription
   
@@ -41,15 +45,17 @@ export class DashboardComponent implements OnInit,OnDestroy {
     this.subscription.add(
       this.services.chatsUser().getChats(this.id).subscribe({
         next:(e)=>{
+          console.log(e)
           if(e.error){
-            alert(e.message);
+            this.errorService.showError(e)
             return
           }
           this.data = e.data;
           this.spinner.noShowSpinner();
         },
         error:(e)=>{
-          alert(e.message);
+          
+          this.errorService.showError(e)
         }
       })
     )

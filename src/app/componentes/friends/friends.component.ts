@@ -1,4 +1,6 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { AuthServiceService } from 'src/app/auth/authService/auth-service.service';
 import { FriendsShow } from 'src/app/models/usuarios/friends';
@@ -6,6 +8,8 @@ import { Usuarios } from 'src/app/models/usuarios/usuarios';
 import { Contexto } from 'src/app/services/contexto';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { UsuariosService } from 'src/app/services/usuarios/usuarios.service';
+import { ModalAlertConfirmComponent } from 'src/app/shared/modalsAlert/modal-alert-confirm/modal-alert-confirm.component';
+import { configAlert } from 'src/app/shared/modalsConfig/alertConfig';
 
 @Component({
   selector: 'app-friends',
@@ -13,7 +17,7 @@ import { UsuariosService } from 'src/app/services/usuarios/usuarios.service';
   styleUrls: ['./friends.component.scss']
 })
 export class FriendsComponent implements OnInit {
-  constructor(private contexto:Contexto,private auth:AuthServiceService,private spinner:SpinnerService){}
+  constructor(private contexto:Contexto,private auth:AuthServiceService,private spinner:SpinnerService,private modal:MatDialog){}
   private subscribtion = new Subscription
   pageUsers:number= 20;
   pageFriends:number=20;
@@ -57,17 +61,24 @@ export class FriendsComponent implements OnInit {
     )
   }
   addFriend(data:Usuarios){
-    this.subscribtion.add(
-      this.contexto.users().addFriend(this.auth.getId(),data.id).subscribe({
-        next:(e)=>{          
-          console.log(e);
-          this.getUsers();
-        },
-        error:(e)=>{
-          console.log(e.message)
-        }
-      })
-    )
+    const modal= this.modal.open(ModalAlertConfirmComponent,{
+      data:{
+        message:"Estas seguro de querer agregar a esta persona?"
+      },
+      ...configAlert
+    })
+
+    // this.subscribtion.add(
+    //   this.contexto.users().addFriend(this.auth.getId(),data.id).subscribe({
+    //     next:(e)=>{          
+    //       console.log(e);
+    //       this.getUsers();
+    //     },
+    //     error:(e)=>{
+    //       console.log(e.message)
+    //     }
+    //   })
+    // )
     
   }
 }

@@ -84,7 +84,7 @@ i{
 }
 .itemCargando::before {
     content: "cargando.";
-    animation: cargandoAnimacion 6s infinite;
+    animation: cargandoAnimacion 2s infinite;
 }
 
 @media (max-width: 500px) {

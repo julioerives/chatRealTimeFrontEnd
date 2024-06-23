@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AuthServiceService } from 'src/app/auth/authService/auth-service.service';
 import { Friends } from 'src/app/models/usuarios/friends';
 import { Contexto } from 'src/app/services/contexto';
+import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 
 @Component({
   selector: 'app-new-chat',
@@ -14,7 +15,8 @@ export class NewChatComponent implements OnInit {
   public form!: FormGroup;
   constructor(private contexto: Contexto,
     private authService:AuthServiceService,
-    private _form:FormBuilder
+    private _form:FormBuilder,
+    private spinner: SpinnerService
   ){}
   private subscription: Subscription = new Subscription();
   public userFriends: Friends[]=[];
@@ -54,13 +56,19 @@ export class NewChatComponent implements OnInit {
     if(!this.form.valid){
       return
     }
+    this.spinner.showSpinner();
     const dataChats = this.form.value
     this.subscription.add(
     this.contexto.chatsUser().insertChat({id:this.authService.getId(),...dataChats}).subscribe({
       next:(e)=>{
-        console.log(e)
+        this.spinner.noShowSpinner()
+        if(e.error){
+          return
+        }
+        
       },
       error:(e)=>{
+        this.spinner.noShowSpinner()
         console.error(e)
       }
     })
