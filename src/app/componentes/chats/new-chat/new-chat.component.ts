@@ -23,7 +23,6 @@ export class NewChatComponent implements OnInit {
   ngOnInit(): void {
       this.getFriends();
       this.getForm();
-      console.log(this.form)
   }
   getFriends(){
     this.subscription.add(
@@ -58,11 +57,13 @@ export class NewChatComponent implements OnInit {
     }
     this.spinner.showSpinner();
     const dataChats = this.form.value
+    console.log(dataChats);
     this.subscription.add(
     this.contexto.chatsUser().insertChat({id:this.authService.getId(),...dataChats}).subscribe({
       next:(e)=>{
         this.spinner.noShowSpinner()
         if(e.error){
+          
           return
         }
         

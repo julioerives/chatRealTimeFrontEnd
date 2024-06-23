@@ -45,16 +45,15 @@ export class DashboardComponent implements OnInit,OnDestroy {
     this.subscription.add(
       this.services.chatsUser().getChats(this.id).subscribe({
         next:(e)=>{
-          console.log(e)
+          this.spinner.noShowSpinner();
           if(e.error){
-            this.errorService.showError(e)
+            // this.errorService.showError(e)
             return
           }
           this.data = e.data;
-          this.spinner.noShowSpinner();
+          
         },
         error:(e)=>{
-          
           this.errorService.showError(e)
         }
       })

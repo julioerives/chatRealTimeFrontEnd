@@ -23,11 +23,16 @@ export class FriendsComponent implements OnInit {
   pageFriends:number=20;
   public data:Usuarios[]=[];
   public dataFriends:FriendsShow[]=[];
+  public dataFollowing:FriendsShow[]=[];
+  public dataFollowers:FriendsShow[]=[];
+  
   
   ngOnInit(): void {
     this.spinner.showSpinner();
       this.getUsers();
       this.getFriends();    
+      this.getFollowing();
+      this.getFollowers();
   }
   getUsers(){
     this.subscribtion.add(
@@ -48,11 +53,43 @@ export class FriendsComponent implements OnInit {
     this.subscribtion.add(
       this.contexto.users().getFriends(this.auth.getId()).subscribe({
         next:(e)=>{
-      this.spinner.noShowSpinner();
           if(e.error){
             return
           }
           this.dataFriends = e.data;
+        },
+        error:(e)=>{
+          console.log(e)
+        }
+      })
+    )
+  }
+  getFollowing(){
+    this.subscribtion.add(
+      this.contexto.users().getFollowing(this.auth.getId()).subscribe({
+        next:(e)=>{
+      this.spinner.noShowSpinner();
+
+          if(e.error){
+            return
+          }
+          this.dataFollowing = e.data;
+        },
+        error:(e)=>{
+          console.log(e)
+        }
+      })
+    )
+  }
+  getFollowers(){
+    this.subscribtion.add(
+      this.contexto.users().getFollowers(this.auth.getId()).subscribe({
+        next:(e)=>{
+      this.spinner.noShowSpinner();
+          if(e.error){
+            return
+          }
+          this.dataFollowers = e.data;
         },
         error:(e)=>{
           console.log(e)
@@ -68,17 +105,17 @@ export class FriendsComponent implements OnInit {
       ...configAlert
     })
 
-    // this.subscribtion.add(
-    //   this.contexto.users().addFriend(this.auth.getId(),data.id).subscribe({
-    //     next:(e)=>{          
-    //       console.log(e);
-    //       this.getUsers();
-    //     },
-    //     error:(e)=>{
-    //       console.log(e.message)
-    //     }
-    //   })
-    // )
+    this.subscribtion.add(
+      this.contexto.users().addFriend(this.auth.getId(),data.id).subscribe({
+        next:(e)=>{          
+          console.log(e);
+          this.getUsers();
+        },
+        error:(e)=>{
+          console.log(e.message)
+        }
+      })
+    )
     
   }
 }

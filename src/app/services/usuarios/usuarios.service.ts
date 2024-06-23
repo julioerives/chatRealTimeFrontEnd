@@ -17,10 +17,20 @@ export class UsuariosService extends Main {
     })
   }
   addFriend(idUser:string|number,idFriend:string | number){
-    return this._cliente.post<Response>(this.url+"/addFriend",{idUser1:idUser,idUser2:idFriend});
+    return this._cliente.post<Response>(this.url+"/addFriend",{idSeguidor:idUser,idSeguido:idFriend});
   }
   getFriends(idUser:string){
     return this._cliente.get<Response>(this.url+"/friends",{
+      params: {id:idUser}
+    })
+  }
+  getFollowing(idUser:string){
+    return this._cliente.get<Response>(this.url+"/following",{
+      params: {id:idUser}
+    })
+  }
+  getFollowers(idUser:string){
+    return this._cliente.get<Response>(this.url+"/followers",{
       params: {id:idUser}
     })
   }

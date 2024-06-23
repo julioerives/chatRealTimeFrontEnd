@@ -16,6 +16,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   @ViewChild('message') contenido!: ElementRef;
   private subscription: Subscription = new Subscription();
   public messages: any[] = [];
+  public getMessages:boolean = false;
   public bandera: boolean = false;
   public message: string = "";
   id_user:number = 1;
@@ -68,15 +69,22 @@ export class ChatComponent implements OnInit, OnDestroy {
   getPreviousMessage(): void {
     this.subscription.add(
       this.socketService.onPreviousMessages().subscribe((data: any) => {
+        if(data.error){
+          return
+        }
         this.messages = data;
+        this.getMessages=true;
       })
     );
   }
 
   scrollToBottom(): void {
     try {
+      
+      if(this.contenido.nativeElement != undefined){
       const contenido = this.contenido.nativeElement;
       contenido.scrollTop = contenido.scrollHeight;
+      }
     } catch (err) {
       console.error('Error scrolling to bottom:', err);
     }
