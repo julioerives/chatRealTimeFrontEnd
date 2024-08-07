@@ -69,7 +69,7 @@ export class FriendsComponent implements OnInit {
       this.contexto.users().getFollowing(this.auth.getId()).subscribe({
         next:(e)=>{
       this.spinner.noShowSpinner();
-
+      console.log(e);
           if(e.error){
             return
           }
