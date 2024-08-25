@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy,Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy,Inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SocketService } from 'src/app/services/socket/socket.service';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -11,7 +11,7 @@ import { SpinnerService } from 'src/app/services/spinner/spinner.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent implements OnInit, OnDestroy,OnChanges {
   public form!: FormGroup;
   @ViewChild('message') contenido!: ElementRef;
   private subscription: Subscription = new Subscription();
@@ -20,8 +20,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   public bandera: boolean = false;
   public message: string = "";
   id_user:number = 1;
-   
-    constructor( @Inject(MAT_DIALOG_DATA) public data: any,private socketService: SocketService, private _formBuilder: FormBuilder,private authService:AuthServiceService,private cdr: ChangeDetectorRef,private spinner:SpinnerService) {}
+  @Input() id_chat:number = 0;
+  constructor(private socketService: SocketService, private _formBuilder: FormBuilder,private authService:AuthServiceService,private cdr: ChangeDetectorRef,private spinner:SpinnerService) {}
 
   ngOnInit(): void {
     this.socketService.initializeSocket();
@@ -33,14 +33,23 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
   ngAfterViewChecked() {
     this.cdr.detectChanges();
-    this.scrollToBottom();
+    // this.scrollToBottom();
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
     this.socketService.disconnect();
   }
-
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['id_chat']) {
+        this.subscription.unsubscribe();
+        this.subscription = new Subscription(); 
+        this.socketService.initializeSocket();
+        this.getPreviousMessage();
+        this.messages = [];
+        this.getMessage(); 
+    }
+}
   changeID() {
     this.id_user = this.authService.getId();
   }
@@ -54,12 +63,14 @@ export class ChatComponent implements OnInit, OnDestroy {
   getMessage(): void {
     this.subscription.add(
       this.socketService.onMessage().subscribe((message: any) => {
+        console.log("🚀 ~ ChatComponent ~ this.socketService.onMessage ~ message:", message)
         this.messages.push(message);
       })
     );
   }
 
   sendMessage(): void {
+    console.log(this.form.value)
     if (this.form.valid) {
       this.socketService.sendMessage({ id_user: this.id_user, mensaje: this.form.value.message });
       this.form.reset();
@@ -73,6 +84,7 @@ export class ChatComponent implements OnInit, OnDestroy {
           return
         }
         this.messages = data;
+        console.log("🚀 ~ ChatComponent ~ this.socketService.onPreviousMessages ~ messages:", this.messages)
         this.getMessages=true;
       })
     );

@@ -1,11 +1,11 @@
-<mat-sidenav-container class="example-container" hasBackdrop="true">
+<!-- <mat-sidenav-container class="example-container" hasBackdrop="true">
     <mat-sidenav #sidenav mode="over" class="example-sidenav">
       <div class="closeSidenav">
-        <h1> Chat Real Time </h1>
+        <h1> Chat Real Time </h1> -->
         <!-- <p><button mat-button (click)="sidenav.toggle()">
             <mat-icon>arrow_forward</mat-icon>
             </button></p> -->
-      </div>
+      <!-- </div>
       <div class="listRoutes">
         <div class="list">
         <h1 class="routeRedirect" routerLink="/dashboard" routerLinkActive="true">Dashboard  <mat-icon>home</mat-icon></h1>
@@ -24,4 +24,24 @@
 
       </router-outlet>
     </mat-sidenav-content>
-  </mat-sidenav-container>
+  </mat-sidenav-container> -->
+  <mat-drawer-container class="container">
+    <mat-drawer mode="side" class="drawer-content" opened>
+      <div class="routes">
+        <div class="icon-container" routerLink="/dashboard">
+          <mat-icon>home</mat-icon>
+        </div>
+        <div class="icon-container" routerLink="friends">
+          <mat-icon>group</mat-icon>
+        </div>
+      </div>
+      <div class="logout">
+        <div class="icon-container" (click)="cerrarSesion()">
+          <mat-icon>logout</mat-icon>
+        </div>
+      </div>
+    </mat-drawer>
+    <router-outlet class="router">
+
+    </router-outlet>
+  </mat-drawer-container>

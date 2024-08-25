@@ -20,6 +20,7 @@ import { ErrorShowService } from 'src/app/shared/errorsMethods/error-show.servic
 })
 export class DashboardComponent implements OnInit,OnDestroy {
   id:number|string = 0;
+  public id_chat_selected:number = 0;
   data: Chats[]=[];
   constructor(private services:Contexto,
     private authService:AuthServiceService,
@@ -41,10 +42,10 @@ export class DashboardComponent implements OnInit,OnDestroy {
     this.id=this.authService.getId()
   }
   getChats(){
-    this.spinner.showSpinner()
     this.subscription.add(
       this.services.chatsUser().getChats(this.id).subscribe({
-        next:(e)=>{
+        next:(e) => {
+          console.log("🚀 ~ DashboardComponent ~ this.services.chatsUser ~ e:", e)
           this.spinner.noShowSpinner();
           if(e.error){
             // this.errorService.showError(e)
@@ -60,11 +61,8 @@ export class DashboardComponent implements OnInit,OnDestroy {
     )
   }
   openChat(data:any){
+    this.id_chat_selected = data.id_chat
     this.authService.setChatId(data.id_chat);
-    const dialog = this.modal.open(ChatComponent,{
-      data:data,
-      ...configChats
-    })
   }
   openNewChat(){
     const dialog = this.modal.open(NewChatComponent,{

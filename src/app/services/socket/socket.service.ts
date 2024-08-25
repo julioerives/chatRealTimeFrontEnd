@@ -20,7 +20,7 @@ export class SocketService {
     }
     this.socket = io(enviroment.URL_SERVICES, {
       query: {
-        idChat: this.authService.getChatId()
+        idChat: this.authService.getChatId() || 0
       }
     });
   }
@@ -40,7 +40,6 @@ export class SocketService {
   onPreviousMessages(): Observable<any> {
     return new Observable(observer => {
       this.socket.on('previous messages', (messages) => {
-        console.log("Hola");
         observer.next(messages);
       });
     });
