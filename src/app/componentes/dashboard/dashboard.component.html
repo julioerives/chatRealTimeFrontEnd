@@ -1,13 +1,53 @@
 <!-- <button class="btn" (click)="openNewChat()">Agregar chat</button> -->
 <div class="container">
   <div class="container-chats">
+    <div class="header-chats">
+      <h1>Chats</h1>
+      <div class="menu">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>forum</mat-icon>
+            <span>Nuevo mensaje</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>group_add</mat-icon>
+            <span>Nuevo grupo</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+    <div class="cont-search">
+      <mat-icon>search</mat-icon>
+      <input type="text" class="search" placeholder="buscar chat">
+    </div>
     <div *ngFor="let chats of data">
         <div class="chat-cont" appearance="outlined" (click)="openChat(chats)">
             <mat-card-content class="chat">
               <div mat-card-avatar class="group-image"></div>
               <div class="cont">
+                <div class="cont-text">
                 <div class="title-cont">{{chats.nombre}}</div>
-                <div>{{chats.last_message ?chats.last_message.message: 'Inicia la conversación'}}</div>
+                  <div class="text">{{chats.last_message ?chats.last_message.message: 'Inicia la conversación'}}</div>
+     
+                </div>
+                <div class="options-chat">
+                  <button mat-icon-button [matMenuTriggerFor]="options" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #options="matMenu">
+                    <button mat-menu-item>
+                      <mat-icon>open_in_new</mat-icon>
+                      <span>Abrir chat</span>
+                    </button>
+                    <button mat-menu-item>
+                      <mat-icon>delete</mat-icon>
+                      <span>Borrar chat</span>
+                    </button>
+                  </mat-menu>  
+                </div>
               </div>
             </mat-card-content>
           </div>

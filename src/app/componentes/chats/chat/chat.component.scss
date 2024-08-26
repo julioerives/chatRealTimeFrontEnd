@@ -3,7 +3,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: rgb(215, 215, 215);
+    background-color: rgb(255, 255, 255);
 }
 .message{
     width:calc(100% - 30px);
@@ -45,7 +45,7 @@
     box-shadow: 0 0 1px rgb(182, 182, 182);
 }
 .messageTextMe{
-    background-color: var(--violet);
+    background-color:rgb(72, 72, 140);
     color: white;
 }
 .containerMessagesMe, .containerMessagesFriend {
