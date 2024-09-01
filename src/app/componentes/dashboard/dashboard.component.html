@@ -57,6 +57,6 @@
 </div>
 <div class="container-chat">
   <app-chat *ngIf="id_chat_selected != 0" [id_chat]=id_chat_selected ></app-chat>
-  <img class="img-no-chat" src="../../../assets/fondoNoChat.png" alt="">
+  <img *ngIf="id_chat_selected == 0" class="img-no-chat" src="../../../assets/fondoNoChat.png" alt="">
 </div>
 </div>
