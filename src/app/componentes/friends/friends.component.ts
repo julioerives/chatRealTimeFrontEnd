@@ -6,7 +6,7 @@ import { AuthServiceService } from 'src/app/auth/authService/auth-service.servic
 import { FriendsShow } from 'src/app/models/usuarios/friends';
 import { Usuarios } from 'src/app/models/usuarios/usuarios';
 import { Contexto } from 'src/app/services/contexto';
-import { SpinnerService } from 'src/app/services/spinner/spinner.service';
+import { SpinnerService } from 'src/app/helpers/spinner/spinner.service';
 import { UsuariosService } from 'src/app/services/usuarios/usuarios.service';
 import { ModalAlertConfirmComponent } from 'src/app/shared/modalsAlert/modal-alert-confirm/modal-alert-confirm.component';
 import { configAlert } from 'src/app/shared/modalsConfig/alertConfig';

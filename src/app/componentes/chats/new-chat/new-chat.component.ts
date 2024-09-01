@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { AuthServiceService } from 'src/app/auth/authService/auth-service.service';
 import { Friends } from 'src/app/models/usuarios/friends';
 import { Contexto } from 'src/app/services/contexto';
-import { SpinnerService } from 'src/app/services/spinner/spinner.service';
+import { SpinnerService } from 'src/app/helpers/spinner/spinner.service';
 
 @Component({
   selector: 'app-new-chat',

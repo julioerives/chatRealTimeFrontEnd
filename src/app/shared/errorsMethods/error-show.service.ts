@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { AuthServiceService } from "src/app/auth/authService/auth-service.service";
-import { SpinnerService } from "src/app/services/spinner/spinner.service";
+import { SpinnerService } from "src/app/helpers/spinner/spinner.service";
 import { configAlert } from "../modalsConfig/alertConfig";
 import { ModalAlertComponent } from "../modalsAlert/modal-alert/modal-alert.component";
 @Injectable({

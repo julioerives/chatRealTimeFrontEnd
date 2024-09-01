@@ -3,6 +3,7 @@ import { io, Socket } from 'socket.io-client';
 import { Observable } from 'rxjs';
 import { enviroment } from 'src/enviroments/enviroments';
 import { AuthServiceService } from 'src/app/auth/authService/auth-service.service';
+import { Chats } from 'src/app/models/chats/chats.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class SocketService {
     });
   }
 
-  onPreviousMessages(): Observable<any> {
+  onPreviousMessages(): Observable<Chats> {
     return new Observable(observer => {
       this.socket.on('previous messages', (messages) => {
         observer.next(messages);

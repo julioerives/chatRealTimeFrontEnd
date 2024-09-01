@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { AuthServiceService } from 'src/app/auth/authService/auth-service.service';
 import { AfterViewInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SpinnerService } from 'src/app/services/spinner/spinner.service';
+import { SpinnerService } from 'src/app/helpers/spinner/spinner.service';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',

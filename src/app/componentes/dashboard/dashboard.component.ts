@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { configChats,configNewChat } from 'src/app/shared/modalsConfig/chatConfig';
 import { Router } from '@angular/router';
 import { NewChatComponent } from '../chats/new-chat/new-chat.component';
-import { SpinnerService } from 'src/app/services/spinner/spinner.service';
+import { SpinnerService } from 'src/app/helpers/spinner/spinner.service';
 import { ModalAlertComponent } from 'src/app/shared/modalsAlert/modal-alert/modal-alert.component';
 import { configAlert } from 'src/app/shared/modalsConfig/alertConfig';
 import { ErrorShowService } from 'src/app/shared/errorsMethods/error-show.service';
