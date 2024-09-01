@@ -1,7 +1,8 @@
 :root{
     --blue:darkblue;
     --violet: rgb(47, 47, 112);
-    --gray:rgb(206, 206, 206)
+    --colorMessage: rgb(47, 47, 112,0.8);
+    --gray:rgb(206, 206, 206);
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
