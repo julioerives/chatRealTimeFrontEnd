@@ -11,11 +11,44 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    background-color: rgb(232, 232, 232);
+    background-color: rgb(248, 248, 248);
     padding: 10px;
     // transition: all .2s ease;
     overflow: auto;
     scrollbar-gutter: stable;
+}
+.header-chat{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: rgb(225, 225, 225);
+    height: 60px;
+    cursor: pointer;
+}
+.text-header-cont{
+    width: 88%;
+
+}
+.desc-header{
+    opacity: .6;
+}
+.title-header{
+    font-weight: 500;
+}
+.cont-img{
+    width: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+
+}
+.cont-img img{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+
 }
 .end{
     width: 100%;
@@ -23,10 +56,16 @@
     justify-content: center;
     align-items: center;
     height: 50px;
-    padding: 4px 0;
+    padding: 10px 0;
+    background-color: rgb(225, 225, 225);
+
+    height: 60px;
+}
+.cont-send{
+    width: 65%;
 }
 .input-send{
-    width: 500px;
+    width: 100%;
     background-color: white;
 }
 .input-send::placeholder{

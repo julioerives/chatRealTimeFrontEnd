@@ -1,4 +1,27 @@
 <div class="container" >
+  <div class="header-chat">
+    <div class="cont-img">
+      <img src="assets/fondo.png" alt="">
+    </div>
+    <div class="text-header-cont">
+      <div class="title-header">
+        Nombre chat
+      </div>
+      <div class="desc-header">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div>
+    </div>
+    <div class="menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>delete_history</mat-icon>
+          <span>Vaciar chat</span>
+        </button>
+
+      </mat-menu>
+    </div>
+  </div>
   <div class="message"  id="message" *ngIf="getMessages" #message>
     <div *ngFor="let msg of messages" >
       <div [ngClass]="msg.id_usuario == id_user?'containerMessagesMe':'containerMessagesFriend'">
@@ -29,7 +52,7 @@
     </div>
   </div>
   <div class="end">
-    <form [formGroup]="form" (ngSubmit)="sendMessage()">
+    <form [formGroup]="form" (ngSubmit)="sendMessage()" class="cont-send">
       <input type="text" formControlName="message" class="input-send" placeholder="Escriba su mensaje">
     </form>
   </div>

@@ -20,8 +20,10 @@
       </div>
     </div>
     <div class="cont-search">
-      <mat-icon>search</mat-icon>
-      <input type="text" class="search" placeholder="buscar chat">
+      <div class="all-search">
+        <mat-icon>search</mat-icon>
+        <input type="text" class="search" placeholder="buscar chat">
+      </div>
     </div>
     <div *ngFor="let chats of data">
         <div class="chat-cont" appearance="outlined" (click)="openChat(chats)">
@@ -54,6 +56,7 @@
     </div>
 </div>
 <div class="container-chat">
-  <app-chat [id_chat]=id_chat_selected></app-chat>
+  <app-chat *ngIf="id_chat_selected != 0" [id_chat]=id_chat_selected ></app-chat>
+  <img class="img-no-chat" src="../../../assets/fondoNoChat.png" alt="">
 </div>
 </div>
